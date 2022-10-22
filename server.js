@@ -1,6 +1,7 @@
-const express=require('express');
-const app=express();
+const http=require('http')
 
-app.get("/", (req, res)=>{res.send("Hello World")})
+const server=http.createServer((req, res)=>{
+    console.log("Vivek")
+})
 
-app.listen(3000, ()=>console.log("Server started running on Port 3000"));
+server.listen(4000)

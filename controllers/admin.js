@@ -1,3 +1,4 @@
+const db=require('../util/database')
 const Product = require('../models/product');
 
 exports.getAddProduct = (req, res, next) => {
@@ -14,18 +15,20 @@ exports.postAddProduct = (req, res, next) => {
   const price = req.body.price;
   const description = req.body.description;
   const product = new Product(null, title, imageUrl, description, price);
-  product.save();
-  res.redirect('/');
+  product.save().then(()=>{
+    res.redirect('/');
+  }).catch(err=>console.log(err));
+  
 };
 
 exports.getProducts = (req, res, next) => {
-  Product.fetchAll(products => {
+  Product.fetchAll().then(([rows, fieldData])=> {
     res.render('admin/products', {
-      prods: products,
+      prods: rows,
       pageTitle: 'Admin Products',
       path: '/admin/products'
     });
-  });
+  }).catch(err=>console.log(err));
 };
 
 exports.getEditProduct = (req, res, next) => {
@@ -62,13 +65,8 @@ exports.postEditProduct=(req,res,next)=>{
 
 exports.postDeleteProduct=(req, res,next)=>{
   const prodID=req.params.productID
-  Product.findByID(prodID, product =>{
-    if(!product){
-      return res.redirect('/')
-    }    
-    console.log("Tried to delete", product)
-    const productDel=new Product(product.id, product.title, product.imageUrl, product.description,product.price)
-    productDel.delete()
-    res.redirect('/admin/products')
-  })
+  Product.findByID(prodID).then(([product])=>{
+    console.log("Tried to delete", product[0])
+    Product.delete(product[0].id).then(()=>res.redirect('/admin/products')).catch(err=>console.log(err))
+  }).catch(err=>console.log(err))    
 }

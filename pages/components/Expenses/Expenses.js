@@ -8,11 +8,12 @@ function Expenses(props) {
 
   const filterChangeHandler = (selectedYear) => {
     setFilteredYear(selectedYear);
-    console.log(selectedYear);
     props.filterExpenses(selectedYear);
   };
 
-  let expenseItems = <p>No Expense Found!</p>;
+  let expenseItems = (
+    <h2 className="expenses-list__fallback">No Expense Found!</h2>
+  );
 
   if (props.expenses.length > 0) {
     expenseItems = props.expenses.map((expense) => (

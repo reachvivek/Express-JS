@@ -231,3 +231,13 @@ a {
   font-weight: bold;
   border-radius: 6px;
 }
+
+.expenses-list {
+  list-style: none;
+  padding: 0;
+}
+
+.expenses-list__fallback {
+  color: white;
+  text-align: center;
+}

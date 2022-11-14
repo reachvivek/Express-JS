@@ -42,7 +42,6 @@ function MyApp({ Component, pageProps }) {
     const newExpenses = [...DUMMY_DATA].filter(
       (expense) => expense.date.getFullYear() == year
     );
-    console.log(newExpenses);
     setExpenses(newExpenses);
   }
 

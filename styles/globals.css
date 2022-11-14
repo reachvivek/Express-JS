@@ -120,3 +120,15 @@ a {
   width: 50rem;
   max-width: 95%;
 }
+
+.delete-btn {
+  background-color: #4b4b4b;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  padding-left: 2rem;
+}
+
+.icon {
+  font-size: 1.8rem;
+}

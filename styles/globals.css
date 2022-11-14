@@ -121,6 +121,14 @@ a {
   max-width: 95%;
 }
 
+.edit-btn {
+  background-color: #4b4b4b;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  padding-left: 2rem;
+}
+
 .delete-btn {
   background-color: #4b4b4b;
   border: none;

@@ -4,6 +4,13 @@ import "../styles/globals.css";
 import CreateExpenses from "./components/CreateExpenses/CreateExpenses";
 
 function MyApp({ Component, pageProps }) {
+  const DUMMY_DATA = [
+    { id: 0, date: new Date(2022, 10, 10), title: "Petrol", price: "500" },
+    { id: 1, date: new Date(2022, 1, 15), title: "Food", price: "300" },
+    { id: 2, date: new Date(2021, 10, 8), title: "Trip", price: "200" },
+    { id: 3, date: new Date(2022, 10, 1), title: "Rent", price: "600" },
+  ];
+
   const [expenses, setExpenses] = useState([
     { id: 0, date: new Date(2022, 10, 10), title: "Petrol", price: "500" },
     { id: 1, date: new Date(2022, 1, 15), title: "Food", price: "300" },
@@ -18,7 +25,6 @@ function MyApp({ Component, pageProps }) {
 
   function deleteHandler(id) {
     const newExpenses = [...expenses].filter((expense) => expense.id !== id);
-    console.log(newExpenses);
     setExpenses(newExpenses);
   }
 
@@ -26,11 +32,20 @@ function MyApp({ Component, pageProps }) {
     const newExpenses = [...expenses];
     newExpenses.map((expense) => {
       if (expense.id == id) {
-        expense.price = "$100";
+        expense.price = "100";
       }
     });
     setExpenses(newExpenses);
   }
+
+  function filterExpenses(year) {
+    const newExpenses = [...DUMMY_DATA].filter(
+      (expense) => expense.date.getFullYear() == year
+    );
+    console.log(newExpenses);
+    setExpenses(newExpenses);
+  }
+
   return (
     <div>
       <CreateExpenses onCreateExpenseHandler={saveCreateExpenseHandler} />
@@ -38,6 +53,7 @@ function MyApp({ Component, pageProps }) {
         expenses={expenses}
         editHandler={(id) => editHandler(id)}
         deleteHandler={(id) => deleteHandler(id)}
+        filterExpenses={(year) => filterExpenses(year)}
       />
       ;
     </div>
